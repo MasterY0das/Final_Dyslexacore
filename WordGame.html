@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="TextStyle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://coolbackgrounds.io/images/backgrounds/white/white-unsplash-9d0375d2.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        button {
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: auto;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            
+        }
+
+        .block {
+            background-color: #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .sentence {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px dashed #333;
+            border-radius: 5px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+        }
+        p{
+            color: #000000;
+            text-align: center;
+            font-size: larger;
+            font-family: 'OpenDyslexic',Arial, Helvetica, sans-serif;           
+        }
+    </style>
+</head>
+<body>
+    <a href="Dyslexacore Home.html">
+        <button type="button" id="trackerBtn">Back</button>
+    </a>
+    <p>Drag to unscramble the word, and drag blocks to the back of the word to progress! Click, "Check Answers," when you are ready!</p>
+    <div class="container">
+        <div class="block" draggable="true" id="0" style="display: none; ">1</div>
+        <div class="block" draggable="true" id="1" style="display: none;">2</div>
+        <div class="block" draggable="true" id="2" style="display: none;">3</div>
+        <div class="block" draggable="true" id="3" style="display: none;">4</div>
+        <div class="block" draggable="true" id="4" style="display: none;">5</div>
+        <div class="block" draggable="true" id="5" style="display: none;">6</div>
+        <div class="block" draggable="true" id="6" style="display: none;">7</div>
+        <div class="block" draggable="true" id="7" style="display: none;">8</div>
+        <div class="block" draggable="true" id="8" style="display: none;">9</div>
+        <div class="block" draggable="true" id="9" style="display: none;">10</div>
+        <div class="block" draggable="true" id="10" style="display: none;">11</div>
+        <div class="block" draggable="true" id="11" style="display: none;">12</div>
+        <div class="block" draggable="true" id="12" style="display: none;">13</div>
+        <div class="block" draggable="true" id="13" style="display: none;">14</div>
+        <div class="block" draggable="true" id="14" style="display: none;">15</div>
+        <div class="block" draggable="true" id="15" style="display: none;">16</div>
+        <div class="block" draggable="true" id="16" style="display: none;">17</div>
+        <div class="block" draggable="true" id="17" style="display: none;">18</div>
+    </div>
+        <div class="sentence" id="sentence" droppable="true"></div>
+        <button id="Buttoner" type="button" onclick="CheckAnswer()">Check answer</button>
+    <script>
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        const WordChoice = ["Area", "World", "Ending", "Trying", "Apple","Pear","Pineapple","Square","Circle","Dyslexia","Having","Believe","Man","Under","Over","Comply","Within","Without","Kiwi","Coal"]
+        let ChoiceOfWord = WordChoice[getRandomInt(WordChoice.length)]
+        ChoiceOfWord = ChoiceOfWord.toUpperCase()
+
+        let LetterArray = ChoiceOfWord.split("")
+        let Scrambled = shuffleArray(LetterArray)
+        for (var i = 0; i < Scrambled.length; i++){
+            
+            document.getElementById(i).style.display = "inherit";
+            document.getElementById(i).innerHTML = Scrambled[i];
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const blocks = document.querySelectorAll('.block');
+            const sentence = document.getElementById('sentence');
+
+            blocks.forEach(block => {
+                block.addEventListener('dragstart', dragStart);
+                block.addEventListener('dragend', dragEnd);
+            });
+
+            sentence.addEventListener('dragover', dragOver);
+            sentence.addEventListener('dragenter', dragEnter);
+            sentence.addEventListener('dragleave', dragLeave);
+            sentence.addEventListener('drop', drop);
+
+            function dragStart() {
+                this.classList.add('dragging');
+            }
+
+            function dragEnd() {
+                this.classList.remove('dragging');
+            }
+
+            function dragOver(e) {
+                e.preventDefault();
+            }
+
+            function dragEnter(e) {
+                e.preventDefault();
+                this.classList.add('hovered');
+            }
+
+            function dragLeave() {
+                this.classList.remove('hovered');
+            }
+
+            function drop() {
+                this.classList.remove('hovered');
+                const draggedBlock = document.querySelector('.dragging');
+                this.appendChild(draggedBlock);
+            }
+
+            function resetSentence() {
+                sentence.innerHTML = '';
+            }
+
+            document.getElementById('trackerBtn').addEventListener('click', function() {
+                resetSentence();
+            });
+        });
+        function CheckAnswer(){
+            let display = document.getElementById("sentence").innerText
+            display = display.split(" ").join("");
+            display = display.split("\n").join("");
+            if (display===ChoiceOfWord){
+                document.getElementById("Buttoner").innerText = "You got it right!";
+            } else {
+                document.getElementById("Buttoner").innerText = "Sorry, try again.";
+                
+            }
+            
+        }
+    </script>
+        <a href="WordGame.html">
+            <button type="button" id="trackerBtn">New</button>
+        </a>
+</body>
+</html>

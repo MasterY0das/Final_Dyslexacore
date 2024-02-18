@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball Tracker Game</title>
+    <style>
+        .button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        input {
+            color: red;
+            font-size: 16px;
+            font-family: 'OpenDyslexic',Arial, Helvetica, sans-serif;
+        }
+        body {
+            background-image: url('https://png.pngtree.com/background/20220714/original/pngtree-comic-background-board-focus-lines-picture-image_1605886.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+
+
+</head>
+<body>
+    <a href="Dyslexacore Home.html">
+        <button type="button" id="trackerBtn">Back</button>
+    </a>
+    <div class="button-container">
+        <button type="button" onclick="startGame()">Start game</button>
+    <input name="Yummy" type="number" id="SpeedOfBall"  placeholder="Speed"/>
+    </div>
+
+    <div id="gameArea" style="width: 640px; height: 480px; border: 1px solid black; position: relative; padding-left: 0;  padding-right: 0; margin-left: auto;  margin-right: auto; display: block;">
+        <div id="ball" style="width: 50px; height: 50px; background-color: rgb(255, 255, 255); position: absolute;"></div>
+    </div>
+
+    <script>
+
+    function startGame() {
+        var ball = document.getElementById('ball');
+        var gameArea = document.getElementById('gameArea');
+
+        var x = 0;
+        var y = 0;
+
+        var dx = parseInt(document.getElementsByName("Yummy")[0].value);
+        var dy = parseInt(document.getElementById("SpeedOfBall").value);
+
+        function moveBall() {
+            x += dx;
+            y += dy;
+
+            if (x <= 0 || x >= gameArea.clientWidth - ball.clientWidth) {
+                dx = -dx;
+                ball.style.backgroundColor = getRandomColor();
+            }
+            if (y <= 0 || y >= gameArea.clientHeight - ball.clientHeight) {
+                dy = -dy;
+                ball.style.backgroundColor = getRandomColor();
+            }
+
+            ball.style.left = x + 'px';
+            ball.style.top = y + 'px';
+
+            requestAnimationFrame(moveBall);
+        }
+
+        moveBall();
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+   
+    </script>
+</body>
+</html>
+

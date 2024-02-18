@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <style>
+        input{
+            font-size: 24px;
+            font-family: 'OpenDyslexic', Arial, sans-serif;
+            color: red;
+        }
+        p1{
+            font-size: 30px;
+            font-family: 'OpenDyslexic',Arial, Helvetica, sans-serif;
+            color: blue;
+        }
+        p{
+            color: black;
+            font-size: x-large;
+        }
+        span{
+            color: black;
+            font-size: x-large;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .Hovering {
+            text-decoration: none;
+        }
+        .Hovering:hover {
+            text-decoration: underline;
+        }
+        body{
+            background-image: url('https://static.vecteezy.com/system/resources/previews/006/469/230/non_2x/abstract-white-and-gray-light-gradient-lines-background-free-vector.jpg');
+        }
+    </style>
+
+</head>
+<body>
+    
+
+    <div>
+        <a href="Dyslexacore Home.html" >
+            <button type="button" class="center">Back</button>
+        </a>
+        
+    </div>
+    <form>
+        <div>
+            <p1> Input the character(s) you want hiding, and the characters that it will hide in, as well as the number of character you want to change the difficulty! Hovering your mouse over the correct answer will underline it!</p>
+        </div>
+        <div class="button-container">
+            <input type="text" id="HidingLetter"  placeholder="Hiding Character">
+            <p> Hiding Character</p>
+        
+        
+            <input type="text" id="SeekingLetter"  placeholder="Cover Characters">
+            <p> Cover Character</p>
+          
+        
+            <input type="number" id="NumberOFCharacters"  placeholder="Number of Characters" >
+            <p> Number of Characters</p>
+        
+        
+            <p style="color: aliceblue;"></p>
+            <button type="button" id="Submitted!" value="Submit" onclick="RunScript()">Submit!</button>
+        </div>
+    </form>
+   
+
+    <script>
+        function getRandomInt(MaximumValue) {
+            return Math.floor(Math.random() * MaximumValue);     
+        }
+        function RunScript(){
+            let Printer = "";
+            let RestartVar = "";
+            let Start = [];
+            const elementToStopAt = document.getElementById("HidingLetter").value;
+            let NumberOFLetters = document.getElementById("NumberOFCharacters").value;
+            for (i = 0; i < NumberOFLetters; i++){
+                Start.push(document.getElementById("SeekingLetter").value);
+            };
+            let RandomInteger = getRandomInt(document.getElementById("NumberOFCharacters").value)
+            Start[RandomInteger] = document.getElementById("HidingLetter").value;
+            
+            for (i = 0;  i < Start.length; i++){
+                if (Start[i] === elementToStopAt) {
+                    break;
+                }    
+                Printer = Printer + Start[i];
+                Printer = Printer + "\n";
+                RestartVar = i
+            };
+            document.getElementById("LetterFind").innerHTML = Printer;
+            document.getElementById("LetterFound").innerHTML = document.getElementById("HidingLetter").value;
+            for (i = RestartVar+2;  i < Start.length; i++){
+
+                Printer = Printer + Start[i];
+                Printer = Printer + "\n";
+            };
+            document.getElementById("LetterCont").innerHTML = Printer;
+        }
+
+    </script>
+    <div>
+     <span id="LetterFind"></span>
+     <span id="LetterFound" class="Hovering"></span>
+     <span id="LetterCont"></span>
+    </div>
+</body>
+</html>

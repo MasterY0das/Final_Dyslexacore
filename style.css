@@ -1,0 +1,58 @@
+h1 {
+  text-align: center;
+  color: red;
+  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; 
+}
+button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 1rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  border-radius: 6px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  margin: 0 10px;
+}
+button:hover {
+  background-color: #ff0000; 
+}
+#mydiv {
+    position: absolute;
+    z-index: 9;
+    background-color: #ff0000;
+    border: 0px solid #d3d3d3;
+    text-align: center;
+    height: 0px;
+  }
+  
+  #mydivheader {
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    background-color: #2196F3;
+    color: #fff;
+  }
+  .text {
+    text-decoration: none;
+  }
+  
+  .text:hover {
+    text-decoration: underline;
+  }
+body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}

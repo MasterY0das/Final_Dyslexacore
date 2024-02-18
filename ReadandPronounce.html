@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div>
+        <a href="Dyslexacore Home.html">
+            <button type="button" class="center">Back</button>
+        </a>
+        
+    </div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-image: url('https://t3.ftcdn.net/jpg/03/16/86/98/360_F_316869849_oHD2qOXRJlZE2Md6SNv0MtvDcgZyHkfv.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+
+        #random-sentence {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #recognition-result {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Speech Recognition</h1>
+    <div id="random-sentence"></div>
+    <button id="generate-btn">Generate Random Sentence</button>
+    <br><br>
+    <button id="start-recognition-btn">Start Recognition(Supervisor recommended)</button>
+    <div id="recognition-result"></div>
+    <p id="recognitionResult"></p>
+
+    <script>
+        var sentences = [
+            "The quick brown fox jumps over the lazy dog.",
+            "How to make a sandwhich",
+            "A watched pot never boils.",
+            "Actions speak louder than words.",
+            "All that glitters is not gold.",
+            "Beggars can't be choosers."
+        ];
+
+        var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.lang = 'en-US';
+
+        function generateRandomSentence() {
+            var randomIndex = Math.floor(Math.random() * sentences.length);
+            return sentences[randomIndex];
+        }
+
+        function updateRandomSentence() {
+            var randomSentence = generateRandomSentence();
+            document.getElementById('random-sentence').textContent = randomSentence;
+        }
+
+        function startRecognition() {
+            recognition.start();
+        }
+
+        recognition.onresult = function(event) {
+            var result = event.results[0][0].transcript;
+            var displayedSentence = document.getElementById('random-sentence').textContent;
+
+            console.log("Recognized Text:", result);
+            console.log("Displayed Sentence:", displayedSentence);
+
+            if (result.trim().toLowerCase() === displayedSentence.trim().toLowerCase()) {
+                document.getElementById('recognition-result').textContent = 'Correct!';
+            } else {
+                document.getElementById('recognition-result').textContent = 'Incorrect. Please try again.';
+            }
+        };
+        recognition.onresult = function(event) {
+        var result = event.results[0][0].transcript;
+        recognitionResult.textContent = 'You said: ' + result;
+        };
+        
+
+        recognition.onerror = function(event) {
+            console.error(event.error);
+        
+        };
+        
+
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            updateRandomSentence();
+            document.getElementById('recognition-result').textContent = '';
+        });
+
+        document.getElementById('start-recognition-btn').addEventListener('click', startRecognition);
+    </script>
+</body>
+</html>
