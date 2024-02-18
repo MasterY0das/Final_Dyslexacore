@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="TextStyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dyslexacore</title>
+    <title style="font-family: 'OpenDyslexic'">Dyslexacore</title>
+    <link href="https://fonts.cdnfonts.com/css/open-dyslexic" rel="stylesheet">
     <style>
         body {
             background-image: url('https://i.pinimg.com/originals/7d/2a/9f/7d2a9fca264faa93561f72b5fc885fec.gif');
@@ -19,7 +20,7 @@
         }
 
         body {
-            font-family: 'OpenDyslexic', Arial, sans-serif; 
+            font-family: 'open-dyslexic', Arial, sans-serif; 
             background-color: #f8f8f8;
             color: #333;
             line-height: 1.6;
@@ -94,13 +95,15 @@
                 <button type="button" id="tracker1Btn">Word Game</button>
             </a>
     <h2><br><br</h2>
-        <h  class="text" style="color: white; text-align:center; font-size: larger;font-family: 'OpenDyslexic',Arial, Helvetica, sans-serif;align-self: center"></p>Dyslexia is a learning disability that affects a person's ability to read. Along with this,
+    <div style="background-color: #007bff; border-radius: 10%;">
+        <h  class="text" style="color: white; text-align:center; font-size: larger;font-family: 'open-dyslexic';align-self: center"></p>Dyslexia is a learning disability that affects a person's ability to read. Along with this,
             it can have influence over a person's organizational skills and literacy skills. We aim to help 
             people with this disability. Dyslexacore is a site made by us to help those with Dyslexia cope with their problems. We have text to speech 
             for those who cannot read our site very well, Eye Control and Tracker to help with visual therapy for Convergence Insufficiency, an eye condition
             often linked with dyslexia that creates problems with how someone's eyes may work together. We also have pronounciation and reading for 
             direct help and therapy for dyslexia, as well as speech recognition to help with this.
         </h>
+    </div>
         <h style="color: white; text-align:center; font-size: larger;font-family: 'OpenDyslexic',Arial, Helvetica, sans-serif;align-self: center">
         </h>
 
@@ -157,7 +160,9 @@
         contentText.addEventListener('click', function() {
             speakText(contentText.textContent);
         });
+        
     </script>
+    
     
     
     
